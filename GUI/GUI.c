@@ -245,7 +245,7 @@ static void DrawCustom1(Adafruit_GFX* gfx, tm_t* tm, struct Lunar_Date* Lunar, g
     GFX_setFont(gfx, u8g2_font_syte_5);
     GFX_setTextColor(gfx, GFX_RED, GFX_BLACK);
     GFX_setCursor(gfx, 72, 190);
-    GFX_printf(gfx, "%.1fv", data->voltage);
+    GFX_printf(gfx, "%d.%dv", data->voltage / 1000,(data->voltage % 1000) / 100);
 
     /*
         TEMP
