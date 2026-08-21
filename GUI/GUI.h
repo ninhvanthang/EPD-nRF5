@@ -7,6 +7,7 @@ typedef enum {
     MODE_PICTURE = 0,
     MODE_CALENDAR = 1,
     MODE_CLOCK = 2,
+    MODE_CUSTOM_1 = 3,
 } display_mode_t;
 
 typedef struct {

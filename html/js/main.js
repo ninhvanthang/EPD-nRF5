@@ -170,8 +170,8 @@ async function syncTime(mode) {
     mode
   ]);
   if (await write(EpdCmd.SET_TIME, data)) {
-    addLog("时间已同步！");
-    addLog("屏幕刷新完成前请不要操作。");
+    addLog("Đã đồng bộ thời gian");
+    addLog("Không vận hành thiết bị cho đến khi quá trình refresh hoàn tất.");
   }
 }
 

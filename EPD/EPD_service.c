@@ -396,7 +396,7 @@ uint32_t ble_epd_init(ble_epd_t* p_epd) {
         uint8_t cfg[] = EPD_CFG_DEFAULT;
         memcpy(&p_epd->config, cfg, sizeof(cfg));
 #endif
-        if (p_epd->config.display_mode == 0xFF) p_epd->config.display_mode = MODE_CALENDAR;
+        if (p_epd->config.display_mode == 0xFF) p_epd->config.display_mode = MODE_CUSTOM_1;
         if (p_epd->config.week_start == 0xFF) p_epd->config.week_start = 0;
         epd_config_write(&p_epd->config);
     }
@@ -431,7 +431,8 @@ uint32_t ble_epd_string_send(ble_epd_t* p_epd, uint8_t* p_string, uint16_t lengt
 void ble_epd_on_timer(ble_epd_t* p_epd, uint32_t timestamp, bool force_update) {
     // Update calendar on 00:00:00, clock on every minute
     if (force_update || (p_epd->config.display_mode == MODE_CALENDAR && timestamp % 86400 == 0) ||
-        (p_epd->config.display_mode == MODE_CLOCK && timestamp % 60 == 0)) {
+        (p_epd->config.display_mode == MODE_CLOCK && timestamp % 60 == 0) ||
+        (p_epd->config.display_mode == MODE_CUSTOM_1 && timestamp % 60 == 0)) {
         epd_gui_update_event_t event = {p_epd, timestamp};
         app_sched_event_put(&event, sizeof(epd_gui_update_event_t), epd_gui_update);
     }
