@@ -93,6 +93,7 @@ static void epd_gui_update(void* p_event_data, uint16_t event_size) {
 static void on_connect(ble_epd_t* p_epd, ble_evt_t* p_ble_evt) {
     p_epd->conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
     EPD_GPIO_Init();
+    EPD_LED_ON();
 }
 
 /**@brief Function for handling the @ref BLE_GAP_EVT_DISCONNECTED event from the S110 SoftDevice.
@@ -107,6 +108,7 @@ static void on_disconnect(ble_epd_t* p_epd, ble_evt_t* p_ble_evt) {
         p_epd->epd->drv->sleep(p_epd->epd);
         nrf_delay_ms(200);  // for sleep
     }
+    EPD_LED_OFF();
     EPD_GPIO_Uninit();
 }
 
