@@ -270,7 +270,8 @@ static void DrawCustom1(Adafruit_GFX* gfx, tm_t* tm, struct Lunar_Date* Lunar, g
     };
 
     GFX_setFont(gfx, u8g2_font_bungee_35);
-    GFX_setTextColor(gfx, GFX_BLACK, GFX_WHITE);
+    if(tm->tm_wday == 0) GFX_setTextColor(gfx, GFX_RED, GFX_WHITE);
+    else GFX_setTextColor(gfx, GFX_BLACK, GFX_WHITE);
     GFX_setCursor(gfx, 200 - GFX_getUTF8Width(gfx, wdaytxt[tm->tm_wday])/2, 160);
     GFX_printf(gfx, "%s", wdaytxt[tm->tm_wday]);
 
@@ -308,7 +309,8 @@ static void DrawCustom1(Adafruit_GFX* gfx, tm_t* tm, struct Lunar_Date* Lunar, g
         char day1[3];
         char day2[3];
         snprintf(day1, sizeof(day1), "%1d", date.tm_mday);
-        GFX_setTextColor(gfx, GFX_BLACK, GFX_WHITE);
+        if(i == 6) GFX_setTextColor(gfx, GFX_RED, GFX_WHITE);
+        else GFX_setTextColor(gfx, GFX_BLACK, GFX_WHITE);
         GFX_setFont(gfx, u8g2_font_syte_20);
         
         GFX_setCursor(gfx, x - GFX_getUTF8Width(gfx, day1)/2 , 263);
